@@ -1,0 +1,189 @@
+[
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "open",
+        "text": "("
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "2"
+    },
+    {
+        "type": "supsub",
+        "mode": "math",
+        "base": {
+            "type": "mathord",
+            "mode": "math",
+            "text": "x"
+        },
+        "sup": {
+            "type": "textord",
+            "mode": "math",
+            "text": "2"
+        }
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "i"
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "m"
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "e"
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "s"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "3"
+    },
+    {
+        "type": "supsub",
+        "mode": "math",
+        "base": {
+            "type": "mathord",
+            "mode": "math",
+            "text": "x"
+        },
+        "sup": {
+            "type": "textord",
+            "mode": "math",
+            "text": "4"
+        }
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "+"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "2"
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "x"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "+"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "5"
+    },
+    {
+        "type": "supsub",
+        "mode": "math",
+        "base": {
+            "type": "mathord",
+            "mode": "math",
+            "text": "x"
+        },
+        "sup": {
+            "type": "textord",
+            "mode": "math",
+            "text": "2"
+        }
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "+"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "6"
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "x"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "+"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "1"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "0"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "0"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "+"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "9"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "close",
+        "text": ")"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "open",
+        "text": "("
+    },
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "x"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "-"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "2"
+    },
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "close",
+        "text": ")"
+    }
+]
