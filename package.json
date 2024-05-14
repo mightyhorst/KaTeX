@@ -172,7 +172,12 @@
       "jest-serializer-html"
     ],
     "testMatch": [
-      "**/test/*-spec.js"
+      "**/test/*-spec.js",
+      "**/test/*.spec.js",
+      "**/test/*.test.js",
+      "**/test/**/*-spec.js",
+      "**/test/**/*.spec.js",
+      "**/test/**/*.test.js"
     ],
     "testEnvironmentOptions": {
       "url": "http://localhost/"
