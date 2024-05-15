@@ -17,7 +17,7 @@ describe('Parser', () => {
         parser = new Parser("x^{2} + y", new Settings());
         parser = new Parser(
             // eslint-disable-next-line no-useless-escape
-            "(2x^2 \times 3x^4 + 2x + 5x^2 + 6x + 100 + 9)(x - 2)",
+            "(2x^2 * 3x^4 + 2x + 5x^2 + 6x + 100 + 9)(x - 2)",
             new Settings());
         const output = parser.parse();
         console.log(`👾 parser.output[0]: `, output[0]);

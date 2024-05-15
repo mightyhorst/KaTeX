@@ -1,0 +1,93 @@
+{
+    "type": "quadratic",
+    "brackets": [
+        {
+            "type": "grouping",
+            "hasBrackets": true,
+            "grouping": [
+                {
+                    "type": "operator",
+                    "value": "*",
+                    "exponent": "4"
+                },
+                {
+                    "type": "operator",
+                    "value": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "2",
+                    "exponent": 1,
+                    "operator": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "x",
+                    "exponent": 1
+                },
+                {
+                    "type": "operator",
+                    "value": "+",
+                    "exponent": "2"
+                },
+                {
+                    "type": "operator",
+                    "value": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "6",
+                    "exponent": 1,
+                    "operator": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "x",
+                    "exponent": 1
+                },
+                {
+                    "type": "operator",
+                    "value": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "100",
+                    "exponent": 1,
+                    "operator": "+"
+                },
+                {
+                    "type": "operator",
+                    "value": "+"
+                },
+                {
+                    "type": "term",
+                    "base": "9",
+                    "exponent": 1,
+                    "operator": "+"
+                }
+            ],
+            "operator": "+"
+        },
+        {
+            "type": "grouping",
+            "hasBrackets": true,
+            "grouping": [
+                {
+                    "type": "term",
+                    "base": "x",
+                    "exponent": 1
+                },
+                {
+                    "type": "operator",
+                    "value": "-"
+                },
+                {
+                    "type": "term",
+                    "base": "2",
+                    "exponent": 1
+                }
+            ],
+            "operator": "-"
+        }
+    ]
+}

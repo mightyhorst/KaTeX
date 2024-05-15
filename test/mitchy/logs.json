@@ -25,24 +25,10 @@
         }
     },
     {
-        "type": "mathord",
+        "type": "atom",
         "mode": "math",
-        "text": "i"
-    },
-    {
-        "type": "mathord",
-        "mode": "math",
-        "text": "m"
-    },
-    {
-        "type": "mathord",
-        "mode": "math",
-        "text": "e"
-    },
-    {
-        "type": "mathord",
-        "mode": "math",
-        "text": "s"
+        "family": "bin",
+        "text": "*"
     },
     {
         "type": "textord",
