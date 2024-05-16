@@ -780,7 +780,62 @@ function createGroupsFromBedmas(ast) {
 
     return ast;
 }
+function createQuadratic(ast) {
+    function recursiveGroup(nodes) {
+        const result = [];
+        let quadraticBody = [];
+        let foundQuadratic = false;
 
+        nodes.forEach((node, i) => {
+            if (node.type === 'group' && node.hasBrackets) {
+                if (i + 1 < nodes.length && nodes[i + 1].type === 'group' && nodes[i + 1].hasBrackets) {
+                    if (!foundQuadratic) {
+                        quadraticBody = [];
+                        foundQuadratic = true;
+                    }
+                    quadraticBody.push(node);
+                } else {
+                    if (foundQuadratic) {
+                        quadraticBody.push(node);
+                        result.push({
+                            uuid: createUuid(),
+                            type: 'quadratic',
+                            body: quadraticBody
+                        });
+                        foundQuadratic = false;
+                    } else {
+                        result.push(node);
+                    }
+                }
+            } else {
+                if (foundQuadratic) {
+                    result.push({
+                        uuid: createUuid(),
+                        type: 'quadratic',
+                        body: quadraticBody
+                    });
+                    foundQuadratic = false;
+                }
+                if (node.body && Array.isArray(node.body)) {
+                    node.body = recursiveGroup(node.body);
+                }
+                result.push(node);
+            }
+        });
+
+        if (foundQuadratic) {
+            result.push({
+                uuid: createUuid(),
+                type: 'quadratic',
+                body: quadraticBody
+            });
+        }
+
+        return result;
+    }
+
+    return recursiveGroup(ast);
+}
 
 const structuredAst = createStructuredAst(astParserFromKatex);
 // const groupedAst = groupByBEDMAS(structuredAst.brackets[0]);
@@ -788,6 +843,7 @@ const structuredAst = createStructuredAst(astParserFromKatex);
 let groupedAst = parseBrackets(astParserFromKatex);
 groupedAst = convertFromKatexToAst(groupedAst);
 groupedAst = createGroupsFromBedmas(groupedAst);
+groupedAst = createQuadratic(groupedAst);
 
 
 // Example use

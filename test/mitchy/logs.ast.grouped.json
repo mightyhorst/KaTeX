@@ -1,173 +1,179 @@
 [
     {
-        "uuid": 22,
-        "type": "group",
-        "hasBrackets": true,
-        "isClosed": true,
+        "uuid": 59,
+        "type": "quadratic",
         "body": [
             {
-                "uuid": 49,
+                "uuid": 22,
                 "type": "group",
-                "operator": "*",
+                "hasBrackets": true,
+                "isClosed": true,
                 "body": [
                     {
-                        "uuid": 23,
-                        "type": "term",
-                        "coefficient": "2",
-                        "base": {
-                            "uuid": 40,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": {
-                            "uuid": 41,
-                            "type": "constant",
-                            "constant": "2",
-                            "text": "2"
-                        },
-                        "text": "2x^2"
+                        "uuid": 49,
+                        "type": "group",
+                        "operator": "*",
+                        "body": [
+                            {
+                                "uuid": 23,
+                                "type": "term",
+                                "coefficient": "2",
+                                "base": {
+                                    "uuid": 40,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": {
+                                    "uuid": 41,
+                                    "type": "constant",
+                                    "constant": "2",
+                                    "text": "2"
+                                },
+                                "text": "2x^2"
+                            },
+                            {
+                                "uuid": 25,
+                                "type": "term",
+                                "coefficient": "3",
+                                "base": {
+                                    "uuid": 42,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": {
+                                    "uuid": 43,
+                                    "type": "constant",
+                                    "constant": "4",
+                                    "text": "4"
+                                },
+                                "text": "3x^4"
+                            }
+                        ]
                     },
                     {
-                        "uuid": 25,
-                        "type": "term",
-                        "coefficient": "3",
-                        "base": {
-                            "uuid": 42,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": {
-                            "uuid": 43,
-                            "type": "constant",
-                            "constant": "4",
-                            "text": "4"
-                        },
-                        "text": "3x^4"
-                    }
-                ]
-            },
-            {
-                "uuid": 52,
-                "type": "group",
-                "operator": "+",
-                "baseKey": "x^1",
-                "body": [
-                    {
-                        "uuid": 27,
-                        "type": "term",
-                        "coefficient": "2",
-                        "base": {
-                            "uuid": 44,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": 1,
-                        "text": "2x"
+                        "uuid": 52,
+                        "type": "group",
+                        "operator": "+",
+                        "baseKey": "x^1",
+                        "body": [
+                            {
+                                "uuid": 27,
+                                "type": "term",
+                                "coefficient": "2",
+                                "base": {
+                                    "uuid": 44,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": 1,
+                                "text": "2x"
+                            },
+                            {
+                                "uuid": 31,
+                                "type": "term",
+                                "coefficient": "6",
+                                "base": {
+                                    "uuid": 47,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": 1,
+                                "text": "6x"
+                            }
+                        ]
                     },
                     {
-                        "uuid": 31,
-                        "type": "term",
-                        "coefficient": "6",
-                        "base": {
-                            "uuid": 47,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": 1,
-                        "text": "6x"
-                    }
-                ]
-            },
-            {
-                "uuid": 53,
-                "type": "group",
-                "operator": "+",
-                "baseKey": "x^2",
-                "body": [
-                    {
-                        "uuid": 29,
-                        "type": "term",
-                        "coefficient": "5",
-                        "base": {
-                            "uuid": 45,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": {
-                            "uuid": 46,
-                            "type": "constant",
-                            "constant": "2",
-                            "text": "2"
-                        },
-                        "text": "5x^2"
-                    }
-                ]
-            },
-            {
-                "uuid": 54,
-                "type": "group",
-                "operator": "+",
-                "baseKey": "constant",
-                "body": [
-                    {
-                        "type": "textord",
-                        "mode": "math",
-                        "text": "100",
-                        "uuid": 33
+                        "uuid": 53,
+                        "type": "group",
+                        "operator": "+",
+                        "baseKey": "x^2",
+                        "body": [
+                            {
+                                "uuid": 29,
+                                "type": "term",
+                                "coefficient": "5",
+                                "base": {
+                                    "uuid": 45,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": {
+                                    "uuid": 46,
+                                    "type": "constant",
+                                    "constant": "2",
+                                    "text": "2"
+                                },
+                                "text": "5x^2"
+                            }
+                        ]
                     },
                     {
-                        "type": "textord",
-                        "mode": "math",
-                        "text": "9",
-                        "uuid": 35
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "uuid": 36,
-        "type": "group",
-        "hasBrackets": true,
-        "isClosed": true,
-        "body": [
-            {
-                "uuid": 57,
-                "type": "group",
-                "operator": "-",
-                "baseKey": "x^1",
-                "body": [
-                    {
-                        "uuid": 37,
-                        "type": "term",
-                        "coefficient": 1,
-                        "base": {
-                            "uuid": 48,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": 1,
-                        "text": "x"
+                        "uuid": 54,
+                        "type": "group",
+                        "operator": "+",
+                        "baseKey": "constant",
+                        "body": [
+                            {
+                                "type": "textord",
+                                "mode": "math",
+                                "text": "100",
+                                "uuid": 33
+                            },
+                            {
+                                "type": "textord",
+                                "mode": "math",
+                                "text": "9",
+                                "uuid": 35
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "uuid": 58,
+                "uuid": 36,
                 "type": "group",
-                "operator": "-",
-                "baseKey": "constant",
+                "hasBrackets": true,
+                "isClosed": true,
                 "body": [
                     {
-                        "type": "textord",
-                        "mode": "math",
-                        "text": "2",
-                        "uuid": 39
+                        "uuid": 57,
+                        "type": "group",
+                        "operator": "-",
+                        "baseKey": "x^1",
+                        "body": [
+                            {
+                                "uuid": 37,
+                                "type": "term",
+                                "coefficient": 1,
+                                "base": {
+                                    "uuid": 48,
+                                    "type": "variable",
+                                    "variable": "x",
+                                    "text": "x"
+                                },
+                                "exponent": 1,
+                                "text": "x"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": 58,
+                        "type": "group",
+                        "operator": "-",
+                        "baseKey": "constant",
+                        "body": [
+                            {
+                                "type": "textord",
+                                "mode": "math",
+                                "text": "2",
+                                "uuid": 39
+                            }
+                        ]
                     }
                 ]
             }
