@@ -16,11 +16,6 @@
                 },
                 {
                     "type": "term",
-                    "base": "2",
-                    "exponent": 1
-                },
-                {
-                    "type": "term",
                     "base": "x",
                     "exponent": 1
                 },
@@ -32,11 +27,6 @@
                 {
                     "type": "operator",
                     "value": "+"
-                },
-                {
-                    "type": "term",
-                    "base": "6",
-                    "exponent": 1
                 },
                 {
                     "type": "term",

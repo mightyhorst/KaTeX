@@ -11,14 +11,14 @@
                 "base": {
                     "type": "mathord",
                     "mode": "math",
-                    "text": "x",
-                    "coefficient": "2"
+                    "text": "x"
                 },
                 "sup": {
                     "type": "textord",
                     "mode": "math",
                     "text": "2"
-                }
+                },
+                "coefficient": "2"
             },
             {
                 "type": "atom",
@@ -32,14 +32,14 @@
                 "base": {
                     "type": "mathord",
                     "mode": "math",
-                    "text": "x",
-                    "coefficient": "3"
+                    "text": "x"
                 },
                 "sup": {
                     "type": "textord",
                     "mode": "math",
                     "text": "4"
-                }
+                },
+                "coefficient": "3"
             },
             {
                 "type": "atom",
@@ -48,14 +48,10 @@
                 "text": "+"
             },
             {
-                "type": "textord",
-                "mode": "math",
-                "text": "2"
-            },
-            {
                 "type": "mathord",
                 "mode": "math",
-                "text": "x"
+                "text": "x",
+                "coefficient": "2"
             },
             {
                 "type": "atom",
@@ -69,30 +65,26 @@
                 "base": {
                     "type": "mathord",
                     "mode": "math",
-                    "text": "x",
-                    "coefficient": "5"
+                    "text": "x"
                 },
                 "sup": {
                     "type": "textord",
                     "mode": "math",
                     "text": "2"
-                }
+                },
+                "coefficient": "5"
             },
             {
                 "type": "atom",
                 "mode": "math",
                 "family": "bin",
                 "text": "+"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "6"
             },
             {
                 "type": "mathord",
                 "mode": "math",
-                "text": "x"
+                "text": "x",
+                "coefficient": "6"
             },
             {
                 "type": "atom",
@@ -103,17 +95,7 @@
             {
                 "type": "textord",
                 "mode": "math",
-                "text": "1"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "0"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "0"
+                "text": "100"
             },
             {
                 "type": "atom",

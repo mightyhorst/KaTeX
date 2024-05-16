@@ -182,6 +182,60 @@ const astParserFromKatex = [
     },
 ];
 
+function joinAllNumbersTogether(katexAst) {
+    /* 👾 e.g.
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "1"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "0"
+    },
+    {
+        "type": "textord",
+        "mode": "math",
+        "text": "0"
+    }
+    👾 */
+    const isNumberNode = (node) => node.type === 'textord' && node.mode === 'math' && !isNaN(node.text);
+
+    const stack = [];
+    let currentNumber = ""; // Used to accumulate numbers
+
+    katexAst.forEach((node, index) => {
+        if (isNumberNode(node)) {
+            // Accumulate numeric text if it's a number
+            currentNumber += node.text;
+            // Check if next node is not a number or it's the last node
+            if (index === katexAst.length - 1 || !isNumberNode(katexAst[index + 1])) {
+                // Push the accumulated number as a single node when no more numbers follow
+                stack.push({
+                    type: 'textord',
+                    mode: 'math',
+                    text: currentNumber
+                });
+                currentNumber = ""; // Reset for the next number
+            }
+        } else {
+            // If current node is not a number and there's an accumulated number, push it first
+            if (currentNumber.length > 0) {
+                stack.push({
+                    type: 'textord',
+                    mode: 'math',
+                    text: currentNumber
+                });
+                currentNumber = ""; // Reset after pushing
+            }
+            // Push non-number node to stack
+            stack.push(node);
+        }
+    });
+
+    return stack;
+}
 function cleanStructuredAst(katexAst) {
     const cleanedAst = [];
     const lenKatexAst = katexAst.length;
@@ -189,13 +243,20 @@ function cleanStructuredAst(katexAst) {
     // Iterate through the AST
     for (let i = 0; i < lenKatexAst; i++) {
         const item = katexAst[i];
-
+        const nextIdx = i + 1;
+        const nextItem = katexAst[nextIdx];
+        //
         // Check for a number followed by a supsub, which signifies a base and exponent
-        if (item.type === 'textord' && !isNaN(item.text) && i + 1 < lenKatexAst && katexAst[i + 1].type === 'supsub') {
-            const nextItem = katexAst[i + 1];
-
+        if (
+            (item.type === 'textord' && !isNaN(item.text) && nextIdx < lenKatexAst && !isNum(nextItem.text) && (nextItem.type === 'supsub' || nextItem.type === 'mathord'))
+        ) {
             // Assign the coefficient and skip the nextItem since it will be processed now
-            nextItem.base.coefficient = item.text;  // Attach the coefficient
+            if (nextItem.type === 'supsub') {
+                // nextItem.base.coefficient = item.text;  // Attach the coefficient
+                nextItem.coefficient = item.text;  // Attach the coefficient
+            } else if (nextItem.type === 'mathord') {
+                nextItem.coefficient = item.text;  // Attach the coefficient
+            }
             cleanedAst.push(nextItem);  // Add the modified 'supsub' to the cleaned AST
             i++;  // Increment to skip the next item as it's already processed
         } else {
@@ -211,6 +272,7 @@ function uuid() {
 }
 function parseBrackets(ast) {
     console.log('🐝 parseBrackets.ast: \n', ast);
+    ast = joinAllNumbersTogether(ast);
     // const cleanedAst = cleanStructuredAst(ast);
     let isBracket = false;
     const stack = [];
@@ -348,6 +410,9 @@ function getKey(obj, key) {
         return obj[key];
     }
     throw new Error(`⛑️ the obj does not have the key: 👉` + key + `, \nobj: 👉` + JSON.stringify(obj, null, 2));
+}
+function isNum(target) {
+    return !isNaN(Number(target));
 }
 function smooshGroup(grouping) {
     if (getKey(grouping, 'type') === 'grouping') {
