@@ -1,136 +1,131 @@
 [
     {
-        "uuid": 0,
+        "uuid": 22,
         "type": "group",
         "hasBrackets": true,
         "isClosed": true,
         "body": [
             {
-                "type": "supsub",
-                "mode": "math",
-                "base": {
-                    "type": "mathord",
-                    "mode": "math",
-                    "text": "x"
-                },
-                "sup": {
-                    "type": "textord",
-                    "mode": "math",
-                    "text": "2"
-                },
-                "coefficient": "2"
+                "uuid": 49,
+                "type": "group",
+                "operator": "*",
+                "body": [
+                    {
+                        "uuid": 23,
+                        "type": "term",
+                        "coefficient": "2",
+                        "base": {
+                            "uuid": 40,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": {
+                            "uuid": 41,
+                            "type": "constant",
+                            "constant": "2",
+                            "text": "2"
+                        },
+                        "text": "2x^2"
+                    },
+                    {
+                        "uuid": 25,
+                        "type": "term",
+                        "coefficient": "3",
+                        "base": {
+                            "uuid": 42,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": {
+                            "uuid": 43,
+                            "type": "constant",
+                            "constant": "4",
+                            "text": "4"
+                        },
+                        "text": "3x^4"
+                    }
+                ]
             },
             {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "*"
-            },
-            {
-                "type": "supsub",
-                "mode": "math",
-                "base": {
-                    "type": "mathord",
-                    "mode": "math",
-                    "text": "x"
-                },
-                "sup": {
-                    "type": "textord",
-                    "mode": "math",
-                    "text": "4"
-                },
-                "coefficient": "3"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "+"
-            },
-            {
-                "type": "mathord",
-                "mode": "math",
-                "text": "x",
-                "coefficient": "2"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "+"
-            },
-            {
-                "type": "supsub",
-                "mode": "math",
-                "base": {
-                    "type": "mathord",
-                    "mode": "math",
-                    "text": "x"
-                },
-                "sup": {
-                    "type": "textord",
-                    "mode": "math",
-                    "text": "2"
-                },
-                "coefficient": "5"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "+"
-            },
-            {
-                "type": "mathord",
-                "mode": "math",
-                "text": "x",
-                "coefficient": "6"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "+"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "100"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "+"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "9"
+                "uuid": 50,
+                "type": "group",
+                "operator": "+",
+                "body": [
+                    {
+                        "uuid": 27,
+                        "type": "term",
+                        "coefficient": "2",
+                        "base": {
+                            "uuid": 44,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": 1,
+                        "text": "2x"
+                    },
+                    {
+                        "uuid": 29,
+                        "type": "term",
+                        "coefficient": "5",
+                        "base": {
+                            "uuid": 45,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": {
+                            "uuid": 46,
+                            "type": "constant",
+                            "constant": "2",
+                            "text": "2"
+                        },
+                        "text": "5x^2"
+                    },
+                    {
+                        "uuid": 31,
+                        "type": "term",
+                        "coefficient": "6",
+                        "base": {
+                            "uuid": 47,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": 1,
+                        "text": "6x"
+                    }
+                ]
             }
         ]
     },
     {
-        "uuid": 1,
+        "uuid": 36,
         "type": "group",
         "hasBrackets": true,
         "isClosed": true,
         "body": [
             {
-                "type": "mathord",
-                "mode": "math",
-                "text": "x"
-            },
-            {
-                "type": "atom",
-                "mode": "math",
-                "family": "bin",
-                "text": "-"
-            },
-            {
-                "type": "textord",
-                "mode": "math",
-                "text": "2"
+                "uuid": 52,
+                "type": "group",
+                "operator": "-",
+                "body": [
+                    {
+                        "uuid": 37,
+                        "type": "term",
+                        "coefficient": 1,
+                        "base": {
+                            "uuid": 48,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": 1,
+                        "text": "x"
+                    }
+                ]
             }
         ]
     }

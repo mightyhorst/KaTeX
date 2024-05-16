@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable comma-dangle */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-unused-vars */
@@ -257,18 +258,144 @@ function cleanStructuredAst(katexAst) {
             } else if (nextItem.type === 'mathord') {
                 nextItem.coefficient = item.text;  // Attach the coefficient
             }
+            nextItem.uuid = createUuid();
             cleanedAst.push(nextItem);  // Add the modified 'supsub' to the cleaned AST
             i++;  // Increment to skip the next item as it's already processed
         } else {
             // For all other cases, add the item to the cleaned AST
+            item.uuid = createUuid();
             cleanedAst.push(item);
         }
     }
     return cleanedAst;
 }
 let _uuid = 0;
-function uuid() {
+function createUuid() {
     return _uuid++;
+}
+function astConstant(constant) {
+    return {
+        uuid: createUuid(),
+        type: 'constant',
+        constant,
+        text: constant,
+    };
+}
+function astVar(variable) {
+    return {
+        uuid: createUuid(),
+        type: 'variable',
+        variable,
+        text: variable,
+    };
+}
+function astOp({
+    uuid,
+    operator,
+}) {
+    /*
+    {
+        "type": "atom",
+        "mode": "math",
+        "family": "bin",
+        "text": "*",
+        "uuid": 24
+    }
+    */
+    return {
+        uuid: uuid || createUuid(),
+        type: 'operator',
+        operator: operator,
+    };
+}
+function astTerm({
+    uuid,
+    coefficient,
+    base,
+    exponent,
+}) {
+    return {
+        uuid: uuid || createUuid(),
+        type: 'term',
+        coefficient: coefficient || 1,
+        base,
+        exponent: exponent || 1,
+        text: `${coefficient || ''}${base.text}${exponent?.text ? '^' + exponent?.text : ''}`,
+    };
+}
+function convert(node) {
+    /* 👾
+    {
+        "type": "mathord",
+        "mode": "math",
+        "text": "x",
+        "coefficient": "2",
+        "uuid": 27
+    },
+    {
+        "type": "supsub",
+        "mode": "math",
+        "base": {
+            "type": "mathord",
+            "mode": "math",
+            "text": "x"
+        },
+        "sup": {
+            "type": "textord",
+            "mode": "math",
+            "text": "2"
+        },
+        "coefficient": "5",
+        "uuid": 29
+    }
+    👾*/
+    switch (node.type) {
+        case 'mathord':
+            return astTerm({
+                uuid: node.uuid || null,
+                coefficient: node.coefficient || null,
+                base: isNum( node.text) ? astConstant(node.text) : astVar(node.text),
+                exponent: null,
+            });
+        case 'supsub':
+            const baseText = node?.base?.text;
+            const supText = node?.sup?.text;
+            return astTerm({
+                uuid: node.uuid || null,
+                coefficient: node.coefficient || null,
+                base: isNum( baseText) ? astConstant(baseText) : astVar(baseText),
+                exponent: isNum( supText) ? astConstant(supText) : astVar(supText),
+            });
+        case 'atom':
+            /*
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "*",
+                "uuid": 24
+            }
+            */
+            if (node.mode === 'math') {
+                switch (node.text) {
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case '÷':
+                        return astOp({
+                            uuid: node.uuid || null,
+                            operator: node.text,
+                        });
+                    default:
+                        return node;
+                }
+            } else {
+                return node;
+            }
+        default:
+            return node;
+    }
 }
 function parseBrackets(ast) {
     console.log('🐝 parseBrackets.ast: \n', ast);
@@ -283,7 +410,7 @@ function parseBrackets(ast) {
         if (item.type === 'atom' && item.text === '(') {
             isBracket = true;
             const newGroup = {
-                uuid: uuid(),
+                uuid: createUuid(),
                 type: 'group',
                 hasBrackets: true,
                 isClosed: false,
@@ -296,9 +423,11 @@ function parseBrackets(ast) {
             currentGroup.isClosed = true;
         } else {
             if (currentGroup && currentGroup.body) {
-                currentGroup.body.push(item);
+                // currentGroup.body.push(convert(item));
+                currentGroup.body.push((item));
             } else {
-                currentGroup.push(item);
+                // currentGroup.push((item));
+                currentGroup.push(convert(item));
             }
         }
     }
@@ -491,11 +620,136 @@ function groupByBEDMAS(grouping) {
     }
     return payload;
 }
+function convertFromKatexToAst(ast) {
+    function visitGroup(group) {
+        const body = group.body;
+        const newBody = [];
+        for (let i = 0; i < body.length; i++) {
+            const term = convert( body[i] );
+            newBody.push(term);
+        }
+        return newBody;
+    }
+    for (let i = 0; i < ast.length; i++) {
+        const item = ast[i];
+        if (item.type === 'group') {
+            item.body = (visitGroup(item));
+        }
+    }
+    return ast;
+}
+function createGroupsFromBedmasARCHIVE(ast) {
+    function visitGroup(group) {
+        const allGroups = [];
+        const body = group.body;
+        const newGroup = () => ({
+            uuid: createUuid(),
+            type: 'group',
+            operator: null,
+            body: [],
+        });
+        let lastGroup = newGroup();
+        let lastTerm = undefined;
+        let lastOp = undefined;
+        for (let i = 0; i < body.length; i++) {
+            // 👉 check the term
+            const term = ( body[i] );
+            if (term.type !== 'term') continue;
+            lastGroup.body.push(term);
+            // 👉 get the next idx and check that next item is an operator
+            const nextIdx = i + 1;
+            const op = body[nextIdx];
+            if (op.type !== 'operator') continue;
+            // 👉 if the operator is the same
+            if (lastOp) {
+                if (lastOp.operator !== op.operator) {
+                    lastGroup.operator = op.operator;
+                    allGroups.push(lastGroup);
+                    lastGroup = newGroup();
+                }
+            }
+            // 👉 set the last op and term
+            i = nextIdx;
+            lastTerm = term;
+            lastOp = op;
+        }
+        return allGroups;
+    }
+    for (let i = 0; i < ast.length; i++) {
+        const group = ast[i];
+        if (group.type === 'group') {
+            group.body = (visitGroup(group));
+        }
+    }
+    return ast;
+}
+function createGroupsFromBedmas(ast) {
+    function visitGroup(group) {
+        const allGroups = [];
+        const body = group.body;
+        const newGroup = () => ({
+            uuid: createUuid(),
+            type: 'group',
+            operator: null,
+            body: [],
+        });
 
+        let currentGroup = newGroup();
+
+        for (let i = 0; i < body.length; i++) {
+            const term = body[i];
+            if (term.type === 'term') {
+                currentGroup.body.push(term);
+                // Check for the next operator
+                if (i + 1 < body.length && body[i + 1].type === 'operator') {
+                    const op = body[i + 1];
+                    if (currentGroup.operator === null) {
+                        currentGroup.operator = op.operator;
+                    } else if (currentGroup.operator !== op.operator) {
+                        // When the operator changes, finalize the current group and start a new one
+                        allGroups.push(currentGroup);
+                        currentGroup = newGroup();
+                        currentGroup.operator = op.operator;
+                    }
+                    i++; // Move past the operator
+                } else {
+                    // If next item is not an operator or doesn't exist, finalize the current group
+                    allGroups.push(currentGroup);
+                    currentGroup = newGroup();
+                }
+            } else if (term.type === 'operator') {
+                // Handle stray operators that may not be followed by terms
+                if (i === body.length - 1 || body[i + 1].type !== 'term') {
+                    currentGroup.operator = term.operator;
+                    allGroups.push(currentGroup);
+                    currentGroup = newGroup();
+                }
+            }
+        }
+
+        // If the last group has any items, push it to the result
+        if (currentGroup.body.length > 0) {
+            allGroups.push(currentGroup);
+        }
+
+        return allGroups;
+    }
+
+    // Iterate over the main AST, transforming each group
+    for (let i = 0; i < ast.length; i++) {
+        if (ast[i].type === 'group') {
+            ast[i].body = visitGroup(ast[i]);
+        }
+    }
+
+    return ast;
+}
 const structuredAst = createStructuredAst(astParserFromKatex);
 // const groupedAst = groupByBEDMAS(structuredAst.brackets[0]);
 // const groupedAst = parseBrackets(structuredAst.brackets[0]);
-const groupedAst = parseBrackets(astParserFromKatex);
+let groupedAst = parseBrackets(astParserFromKatex);
+groupedAst = convertFromKatexToAst(groupedAst);
+groupedAst = createGroupsFromBedmas(groupedAst);
 
 
 // Example use
