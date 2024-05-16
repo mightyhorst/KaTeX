@@ -638,52 +638,8 @@ function convertFromKatexToAst(ast) {
     }
     return ast;
 }
+
 function createGroupsFromBedmasARCHIVE(ast) {
-    function visitGroup(group) {
-        const allGroups = [];
-        const body = group.body;
-        const newGroup = () => ({
-            uuid: createUuid(),
-            type: 'group',
-            operator: null,
-            body: [],
-        });
-        let lastGroup = newGroup();
-        let lastTerm = undefined;
-        let lastOp = undefined;
-        for (let i = 0; i < body.length; i++) {
-            // 👉 check the term
-            const term = ( body[i] );
-            if (term.type !== 'term') continue;
-            lastGroup.body.push(term);
-            // 👉 get the next idx and check that next item is an operator
-            const nextIdx = i + 1;
-            const op = body[nextIdx];
-            if (op.type !== 'operator') continue;
-            // 👉 if the operator is the same
-            if (lastOp) {
-                if (lastOp.operator !== op.operator) {
-                    lastGroup.operator = op.operator;
-                    allGroups.push(lastGroup);
-                    lastGroup = newGroup();
-                }
-            }
-            // 👉 set the last op and term
-            i = nextIdx;
-            lastTerm = term;
-            lastOp = op;
-        }
-        return allGroups;
-    }
-    for (let i = 0; i < ast.length; i++) {
-        const group = ast[i];
-        if (group.type === 'group') {
-            group.body = (visitGroup(group));
-        }
-    }
-    return ast;
-}
-function createGroupsFromBedmas(ast) {
     function visitGroup(group) {
         const allGroups = [];
         const body = group.body;
@@ -720,9 +676,13 @@ function createGroupsFromBedmas(ast) {
             } else if (term.type === 'operator') {
                 // Handle stray operators that may not be followed by terms
                 if (i === body.length - 1 || body[i + 1].type !== 'term') {
-                    currentGroup.operator = term.operator;
-                    allGroups.push(currentGroup);
-                    currentGroup = newGroup();
+                    if (term.operator === '+' || term.operator === '-') {
+                        // 👉TODO split the currentGroup into the same base terms
+                    } else {
+                        currentGroup.operator = term.operator;
+                        allGroups.push(currentGroup);
+                        currentGroup = newGroup();
+                    }
                 }
             }
         }
@@ -744,6 +704,83 @@ function createGroupsFromBedmas(ast) {
 
     return ast;
 }
+function createGroupsFromBedmas(ast) {
+    function visitGroup(group) {
+        const allGroups = [];
+        const body = group.body;
+        const newGroup = () => ({
+            uuid: createUuid(),
+            type: 'group',
+            operator: null,
+            body: [],
+        });
+
+        let currentGroup = newGroup();
+
+        for (let i = 0; i < body.length; i++) {
+            const item = body[i];
+            if (item.type === 'term' || item.type === 'textord') {
+                // Handle both terms and constants
+                currentGroup.body.push(item);
+                if (i + 1 < body.length && body[i + 1].type === 'operator') {
+                    const op = body[i + 1];
+                    if (currentGroup.operator === null) {
+                        currentGroup.operator = op.operator;
+                    } else if (currentGroup.operator !== op.operator) {
+                        allGroups.push(currentGroup);
+                        currentGroup = newGroup();
+                        currentGroup.operator = op.operator;
+                    }
+                    i++; // Skip the operator
+                } else {
+                    allGroups.push(currentGroup);
+                    currentGroup = newGroup();
+                }
+            }
+        }
+
+        if (currentGroup.body.length > 0) {
+            allGroups.push(currentGroup);
+        }
+
+        return groupByBase(allGroups);
+    }
+
+    function groupByBase(groups) {
+        const groupedByBase = [];
+        groups.forEach(group => {
+            if (group.operator === '+' || group.operator === '-') {
+                const baseMap = {};
+                group.body.forEach(term => {
+                    const baseKey = term.base ? (term.base.variable + '^' + (term.exponent ? (term.exponent.constant || term.exponent) : '1')) : 'constant';
+                    if (!baseMap[baseKey]) {
+                        baseMap[baseKey] = {
+                            uuid: createUuid(),
+                            type: 'group',
+                            operator: group.operator,
+                            body: []
+                        };
+                    }
+                    baseMap[baseKey].body.push(term);
+                });
+                Object.values(baseMap).forEach(g => groupedByBase.push(g));
+            } else {
+                groupedByBase.push(group);
+            }
+        });
+        return groupedByBase;
+    }
+
+    for (let i = 0; i < ast.length; i++) {
+        if (ast[i].type === 'group') {
+            ast[i].body = visitGroup(ast[i]);
+        }
+    }
+
+    return ast;
+}
+
+
 const structuredAst = createStructuredAst(astParserFromKatex);
 // const groupedAst = groupByBEDMAS(structuredAst.brackets[0]);
 // const groupedAst = parseBrackets(structuredAst.brackets[0]);

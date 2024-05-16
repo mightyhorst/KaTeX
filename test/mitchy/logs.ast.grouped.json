@@ -49,7 +49,7 @@
                 ]
             },
             {
-                "uuid": 50,
+                "uuid": 52,
                 "type": "group",
                 "operator": "+",
                 "body": [
@@ -67,6 +67,26 @@
                         "text": "2x"
                     },
                     {
+                        "uuid": 31,
+                        "type": "term",
+                        "coefficient": "6",
+                        "base": {
+                            "uuid": 47,
+                            "type": "variable",
+                            "variable": "x",
+                            "text": "x"
+                        },
+                        "exponent": 1,
+                        "text": "6x"
+                    }
+                ]
+            },
+            {
+                "uuid": 53,
+                "type": "group",
+                "operator": "+",
+                "body": [
+                    {
                         "uuid": 29,
                         "type": "term",
                         "coefficient": "5",
@@ -83,19 +103,25 @@
                             "text": "2"
                         },
                         "text": "5x^2"
+                    }
+                ]
+            },
+            {
+                "uuid": 54,
+                "type": "group",
+                "operator": "+",
+                "body": [
+                    {
+                        "type": "textord",
+                        "mode": "math",
+                        "text": "100",
+                        "uuid": 33
                     },
                     {
-                        "uuid": 31,
-                        "type": "term",
-                        "coefficient": "6",
-                        "base": {
-                            "uuid": 47,
-                            "type": "variable",
-                            "variable": "x",
-                            "text": "x"
-                        },
-                        "exponent": 1,
-                        "text": "6x"
+                        "type": "textord",
+                        "mode": "math",
+                        "text": "9",
+                        "uuid": 35
                     }
                 ]
             }
@@ -108,7 +134,7 @@
         "isClosed": true,
         "body": [
             {
-                "uuid": 52,
+                "uuid": 57,
                 "type": "group",
                 "operator": "-",
                 "body": [
@@ -124,6 +150,19 @@
                         },
                         "exponent": 1,
                         "text": "x"
+                    }
+                ]
+            },
+            {
+                "uuid": 58,
+                "type": "group",
+                "operator": "-",
+                "body": [
+                    {
+                        "type": "textord",
+                        "mode": "math",
+                        "text": "2",
+                        "uuid": 39
                     }
                 ]
             }
