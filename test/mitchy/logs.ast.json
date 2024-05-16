@@ -17,8 +17,7 @@
                 {
                     "type": "term",
                     "base": "2",
-                    "exponent": 1,
-                    "operator": "+"
+                    "exponent": 1
                 },
                 {
                     "type": "term",
@@ -37,8 +36,7 @@
                 {
                     "type": "term",
                     "base": "6",
-                    "exponent": 1,
-                    "operator": "+"
+                    "exponent": 1
                 },
                 {
                     "type": "term",
@@ -52,8 +50,7 @@
                 {
                     "type": "term",
                     "base": "100",
-                    "exponent": 1,
-                    "operator": "+"
+                    "exponent": 1
                 },
                 {
                     "type": "operator",
@@ -62,8 +59,7 @@
                 {
                     "type": "term",
                     "base": "9",
-                    "exponent": 1,
-                    "operator": "+"
+                    "exponent": 1
                 }
             ],
             "operator": "+"

@@ -1,28 +1,155 @@
 [
-    [
-        {
-            "type": "term",
-            "base": "2",
-            "exponent": 1,
-            "operator": "+"
-        },
-        {
-            "type": "term",
-            "base": "x",
-            "exponent": 1
-        },
-        {
-            "type": "term",
-            "base": "6",
-            "exponent": 1,
-            "operator": "+"
-        }
-    ],
-    [
-        {
-            "type": "term",
-            "base": "x",
-            "exponent": 1
-        }
-    ]
+    {
+        "uuid": 0,
+        "type": "group",
+        "hasBrackets": true,
+        "isClosed": true,
+        "body": [
+            {
+                "type": "supsub",
+                "mode": "math",
+                "base": {
+                    "type": "mathord",
+                    "mode": "math",
+                    "text": "x",
+                    "coefficient": "2"
+                },
+                "sup": {
+                    "type": "textord",
+                    "mode": "math",
+                    "text": "2"
+                }
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "*"
+            },
+            {
+                "type": "supsub",
+                "mode": "math",
+                "base": {
+                    "type": "mathord",
+                    "mode": "math",
+                    "text": "x",
+                    "coefficient": "3"
+                },
+                "sup": {
+                    "type": "textord",
+                    "mode": "math",
+                    "text": "4"
+                }
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "+"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "2"
+            },
+            {
+                "type": "mathord",
+                "mode": "math",
+                "text": "x"
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "+"
+            },
+            {
+                "type": "supsub",
+                "mode": "math",
+                "base": {
+                    "type": "mathord",
+                    "mode": "math",
+                    "text": "x",
+                    "coefficient": "5"
+                },
+                "sup": {
+                    "type": "textord",
+                    "mode": "math",
+                    "text": "2"
+                }
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "+"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "6"
+            },
+            {
+                "type": "mathord",
+                "mode": "math",
+                "text": "x"
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "+"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "1"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "0"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "0"
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "+"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "9"
+            }
+        ]
+    },
+    {
+        "uuid": 1,
+        "type": "group",
+        "hasBrackets": true,
+        "isClosed": true,
+        "body": [
+            {
+                "type": "mathord",
+                "mode": "math",
+                "text": "x"
+            },
+            {
+                "type": "atom",
+                "mode": "math",
+                "family": "bin",
+                "text": "-"
+            },
+            {
+                "type": "textord",
+                "mode": "math",
+                "text": "2"
+            }
+        ]
+    }
 ]

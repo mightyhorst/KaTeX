@@ -205,6 +205,43 @@ function cleanStructuredAst(katexAst) {
     }
     return cleanedAst;
 }
+let _uuid = 0;
+function uuid() {
+    return _uuid++;
+}
+function parseBrackets(ast) {
+    console.log('🐝 parseBrackets.ast: \n', ast);
+    // const cleanedAst = cleanStructuredAst(ast);
+    let isBracket = false;
+    const stack = [];
+    let currentGroup = undefined;
+    const astWithAst = [];
+    for (let i = 0; i < ast.length; i++) {
+        const item = ast[i];
+        if (item.type === 'atom' && item.text === '(') {
+            isBracket = true;
+            const newGroup = {
+                uuid: uuid(),
+                type: 'group',
+                hasBrackets: true,
+                isClosed: false,
+                body: [],
+            };
+            stack.push(newGroup);
+            currentGroup = newGroup;
+        } else if (item.type === 'atom' && item.text === ')') {
+            currentGroup.body = cleanStructuredAst(currentGroup.body);
+            currentGroup.isClosed = true;
+        } else {
+            if (currentGroup && currentGroup.body) {
+                currentGroup.body.push(item);
+            } else {
+                currentGroup.push(item);
+            }
+        }
+    }
+    return stack;
+}
 
 
 function createStructuredAst(ast) {
@@ -391,7 +428,9 @@ function groupByBEDMAS(grouping) {
 }
 
 const structuredAst = createStructuredAst(astParserFromKatex);
-const groupedAst = groupByBEDMAS(structuredAst.brackets[0]);
+// const groupedAst = groupByBEDMAS(structuredAst.brackets[0]);
+// const groupedAst = parseBrackets(structuredAst.brackets[0]);
+const groupedAst = parseBrackets(astParserFromKatex);
 
 
 // Example use
