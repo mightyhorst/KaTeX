@@ -758,6 +758,7 @@ function createGroupsFromBedmas(ast) {
                             uuid: createUuid(),
                             type: 'group',
                             operator: group.operator,
+                            baseKey,
                             body: []
                         };
                     }
